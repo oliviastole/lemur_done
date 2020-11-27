@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <title>Listitem show</title>
+    <title>Listitem public</title>
 </head>
 
 <body>
 
-    <button id="goback">Go back to: Public list</button>
+    <br>
+    <button id="btnGoBack">Go back to: Public list</button>
+    <br>
 
     <p>Logged in as:</p>
     <p id="userName"></p>
@@ -24,31 +26,29 @@
 
     // ---------------------------------------    
     
-    let container = document.getElementById("container");
-    let listname = document.getElementById("listname"); 
+    let listid = localStorage.getItem("listid");
+
+    let url = "/list_item?listid="+listid;
     let token = localStorage.getItem("token");
-    let listid = localStorage.getItem("listid"); 
-    let goback = document.getElementById("goback");
 
     let [userid, username, sign] = token.split(",");
     userName.innerHTML = [username];
     
+    let container = document.getElementById("container");
+    let listname = document.getElementById("listname"); 
+    let btnGoBack = document.getElementById("btnGoBack"); 
 
-    let url = "/list_item?listid="+listid;
-    
     listname.innerHTML = localStorage.getItem("listname"); 
     
-    goback.addEventListener("click", goBack);
-
-    async function goBack() {
-        location.href = "list_public.html";
-    }
-
+    btnGoBack.addEventListener("click", goBack);
 
     loadlistItems();
 
     //-----------------------------------------
 
+    async function goBack() {
+        location.href = "list_public.html";
+    }
     
     async function loadlistItems() {
         container.innerHTML = "";
@@ -65,12 +65,10 @@
         for(let item of data) {
             let div = document.createElement("div");
             let html = `
-                <br>
                 <h3>${item.item_name}</h3>        
             `;
 
             let hr = document.createElement("hr");
-
             div.innerHTML = html;
             container.appendChild(div);
 

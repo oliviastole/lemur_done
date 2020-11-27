@@ -117,9 +117,8 @@ dbhandler.createUser = async function(user_name, password) {
 // Oppdatere brukernavn og passord
 
 dbhandler.editUser = async function(userid, user_name, password) {
-    // let sql = "UPDATE users SET user_name = 'hallo', password = 'hei' WHERE id = '115' RETURNING *";
-    let sql = "UPDATE users SET user_name = $1, password = $2 WHERE id = '115' RETURNING *";
-    let values = [user_name, password];
+    let sql = "UPDATE users SET user_name = $1, password = $2 WHERE id = $3 RETURNING *";
+    let values = [user_name, password, userid];
     let result = await pool.query(sql, values); // bruke await hvis det tar lang tid (pool)
 
     return result.rows;

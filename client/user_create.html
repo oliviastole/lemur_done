@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <title>User create</title>
+    <title>Create user</title>
 </head>
 <body>
 
-    <h1>Create Your Account</h1>
+    <h1>Create your account</h1>
 
     <form id="theForm">
         <label for="inpEmail">Email: </label>
@@ -32,7 +32,6 @@ let url = "/users";
 let inpEmail = document.getElementById("inpEmail");
 let inpPsw = document.getElementById("inpPsw");
 let outtext = document.getElementById('outtext');
-let btnSend = document.getElementById("btnSend");
 
 theForm.addEventListener("submit", createUser);
 
@@ -57,7 +56,7 @@ theForm.addEventListener("submit", createUser);
             location.href = "index.html";
         }
         else {
-            location.href = "failed.html";
+            location.href = "failed_login.html";
         }
     };
 

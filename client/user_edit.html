@@ -30,8 +30,8 @@
 
 let url = "/users";
 
-let inpEmail = document.getElementById("inpEmail");
-let inpPsw = document.getElementById("inpPsw");
+let inpEmail = document.getElementById("username");
+let inpPsw = document.getElementById("password");
 let outtext = document.getElementById('outtext');
 let delUser = document.getElementById("delUser");
 
@@ -50,11 +50,11 @@ async function editUser(evt) {
     evt.preventDefault();
     
     let updata = {
-        user_name: inpEmail.value,
-        password: inpPsw.value,
+        user_name: username.value,
+        password: password.value,
         id: userid
     };
-    
+
     let cfg = {
         method: "PUT",
         headers: {

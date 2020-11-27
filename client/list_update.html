@@ -16,9 +16,10 @@
 
     <h1>Edit list</h1>
 
-    <h3>Listenavnet er:</h3>
+    <h3>Listname:</h3>
     <input id="listname" type="text">
-    <h3>Beskrivelsen er:</h3>
+
+    <h3>Description:</h3>
     <input id="comment" type="text">
 
     <table>
@@ -36,10 +37,11 @@
 
     <br>
     <br>
-    <button id="update">Update</button>
-    <button id="showlist">Show list</button>
-    <button id="goback">Go back</button>
+    <button id="btnUpdate">Update</button>
+    <button id="btnShowList">Show list</button>
+    <button id="btnGoBack">Go back</button>
     <hr>
+    
     <div id="container"></div>
     <p id="outtext"></p>
 
@@ -49,30 +51,30 @@
 
     // ---------------------------------------    
 
-    let container = document.getElementById("container");
-    let comment = document.getElementById("comment");
-    let createitem = document.getElementById("createitem");
-    let listname = document.getElementById("listname");
-    let goback = document.getElementById("goback");
-    let update = document.getElementById("update");
-    let chkPubl = document.getElementById("chkPubl");
-
-
-    goback.addEventListener("click", goBack);
-    update.addEventListener("click", listUpdate);
-
-    showlist.addEventListener("click", showList);
-    
     let token = localStorage.getItem("token");
-    let listid = localStorage.getItem("listid");
-
-    listname.value = localStorage.getItem("listname"); 
-    comment.value = localStorage.getItem("listcomm"); 
 
     let [userid, username, sign] = token.split(",");
     userName.innerHTML = [username];
 
-    //-----------------------------------------  
+    let container = document.getElementById("container");
+    let listname = document.getElementById("listname");
+    let comment = document.getElementById("comment");
+    
+    let chkPubl = document.getElementById("chkPubl");
+    let btnUpdate = document.getElementById("btnUpdate");
+    let btnShowList = document.getElementById("btnShowList");
+    let btnGoBack = document.getElementById("btnGoBack");
+    let listid = localStorage.getItem("listid");
+
+    btnUpdate.addEventListener("click", listUpdate);
+    btnShowList.addEventListener("click", showList);
+    btnGoBack.addEventListener("click", goBack);
+    
+    listname.value = localStorage.getItem("listname"); 
+    comment.value = localStorage.getItem("listcomm"); 
+
+
+    // Tar deg til nye sider ----------------------------------  
 
     function showList() {
         location.href = "listitem_show.html";
@@ -83,8 +85,7 @@
     }
 
 
-    //----------------------------------------
-
+    // Oppdatere listen med nytt listenavn og beskrivelse ------
 
     async function listUpdate() {
 

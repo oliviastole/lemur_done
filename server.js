@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const { readSync } = require('fs');
 
 const secret = process.env.SECRET || "iremvosjie399403"; // I PRODUKSJON MÅ DENNE I ENV.VARIABLER - noe som finnes på datamaskin
-const salt = process.env.SALT || "fjkaj34f93jfe9w00"; // kryptering, passord, sikkerhet for passord
+const salt = process.env.SALT || "fjkaj34f93jfe9w00"; // kryptering, passord, sikkerhet for passord, blir lagt innimellom
 
 let logindata = {};
 
@@ -178,7 +178,7 @@ app.put('/users', async function (req, res) {
     let password = req.body.password;
     let userid = req.body.id;
 
-    crypto.scrypt(password, "", 64, async function(err, key){
+    crypto.scrypt(password, salt, 64, async function(err, key){
         let hashedPsw = key.toString("hex");
 
         let result = await dbhandler.editUser(userid, user_name, hashedPsw);
@@ -213,7 +213,7 @@ app.post('/users/auth', async function (req, res) {
         return;
     }
 
-    crypto.scrypt(password, salt, 64, async function(err, key){
+    crypto.scrypt(password, "", 64, async function(err, key){
         let hashedPsw = key.toString("hex");
 
         if (result[0].password == hashedPsw){

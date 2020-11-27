@@ -36,7 +36,7 @@
 
     <br>
     <br>
-    <button id="btnSend">Create new list</button>
+    <button id="btnCreate">Create new list</button>
 
     <p id="outtext"></p>
 
@@ -46,17 +46,16 @@
 
     // ---------------------------------------    
     
+    let url = "/lists";
+    let token = localStorage.getItem("token");
+
     let inpName = document.getElementById("inpName");
     let inpComm = document.getElementById("inpComm");
     let chkPubl = document.getElementById("chkPubl");
-    let btnSend = document.getElementById("btnSend");
+    let btnCreate = document.getElementById("btnCreate");
     let outtext = document.getElementById("outtext");
 
-    let url = "/lists";
-
-    let token = localStorage.getItem("token");
-
-    btnSend.addEventListener("click", sendData);
+    btnCreate.addEventListener("click", sendData);
 
     //-----------------------------------------
 

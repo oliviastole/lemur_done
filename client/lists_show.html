@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <title>Lists</title>
+    <title>To do list</title>
 </head>
 
 <body>
 
     <br>
-    <button id="edit">Edit user</button>
-    <button id="public">Show public lists</button>
+    <button id="btnEdit">Edit user</button>
+    <button id="btnPublic">Show public lists</button>
 
     <p>Logged in as:</p>
     <p id="userName"></p>
 
     <h1>To do list</h1>
-    <button id="btn3">Create new list</button>
+    <button id="btnCreate">Create new list</button>
     <br>
     <hr>
     <div id="container"></div>
@@ -31,10 +31,13 @@
 
     // ---------------------------------------    
     
-    let container = document.getElementById("container");
     let url = "/lists";
-
     let token = localStorage.getItem("token");
+
+    let [userid, username, sign] = token.split(",");
+    userName.innerHTML = [username];
+
+    let container = document.getElementById("container");
 
 
     function editUser() {
@@ -49,18 +52,16 @@
         location.href = "lists_create.html";
     }
 
-    
 
-    let edit = document.getElementById("edit");
-    edit.addEventListener("click", editUser);
+    let btnEdit = document.getElementById("btnEdit");
+    btnEdit.addEventListener("click", editUser);
 
-    let public = document.getElementById("public");
-    public.addEventListener("click", showPublic);
+    let btnPublic = document.getElementById("btnPublic");
+    btnPublic.addEventListener("click", showPublic);
 
-    let btn3 = document.getElementById("btn3");
-    btn3.addEventListener("click", newList);
+    let btnCreate = document.getElementById("btnCreate");
+    btnCreate.addEventListener("click", newList);
 
-    
 
     loadLists();
 
@@ -87,37 +88,37 @@
                 <p>${list.comm}</p>            
             `;
 
-            let btn = document.createElement("button");
-            btn.innerHTML = "Delete list";
+            let btnDelete = document.createElement("button");
+            btnDelete.innerHTML = "Delete list";
             let hr = document.createElement("hr");
 
-            let btn2 = document.createElement("button");
-            btn2.innerHTML = "Show list items";
+            let btnShow = document.createElement("button");
+            btnShow.innerHTML = "Show list items";
 
-            let btn1 = document.createElement("button");
-            btn1.innerHTML = "Edit list";
+            let btnEdit = document.createElement("button");
+            btnEdit.innerHTML = "Edit list";
 
             div.innerHTML = html;
-            div.appendChild(btn1);
-            div.appendChild(btn2);
-            div.appendChild(btn);
+            div.appendChild(btnEdit);
+            div.appendChild(btnShow);
+            div.appendChild(btnDelete);
             div.appendChild(hr);
             container.appendChild(div);
 
-            btn1.addEventListener("click", function(){
+            btnEdit.addEventListener("click", function(){
                 localStorage.setItem("listid", list.id);
                 localStorage.setItem("listname", list.list_name);
                 localStorage.setItem("listcomm", list.comm);
                 location.href = "list_update.html";
             });
 
-            btn2.addEventListener("click", function(){
+            btnShow.addEventListener("click", function(){
                 localStorage.setItem("listid", list.id);
                 localStorage.setItem("listname", list.list_name);
                 location.href = "listitem_show.html"; 
             });
 
-            btn.addEventListener("click", function(){
+            btnDelete.addEventListener("click", function(){
                 del(list.id);
             });
 
@@ -132,8 +133,6 @@
             location.href = "error.html";
         }
 
-        let [userid, username, sign] = token.split(",");
-        userName.innerHTML = [username];
     }
 
 
@@ -158,7 +157,6 @@
         loadLists();
     }   
 
-    
 
 </script>
 

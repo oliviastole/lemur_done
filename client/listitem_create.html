@@ -18,7 +18,7 @@
     <label for="itemName">Title:</label>
     <input id="itemName" type="text">
     
-    <button id="btnSend">Create new item</button>
+    <button id="btnCreate">Create new item</button>
 
 </body>
 
@@ -26,20 +26,19 @@
 
     // ---------------------------------------    
     
-    let itemName = document.getElementById("itemName");
-    let listId = document.getElementById("listId");
-    let btnSend = document.getElementById("btnSend");
-
     let url = "/list_item";
-
-    btnSend.addEventListener("click", sendData);
-
-    let listid = localStorage.getItem("listid");
     let token = localStorage.getItem("token");
 
     let [userid, username, sign] = token.split(",");
     userName.innerHTML = [username];
 
+    let itemName = document.getElementById("itemName");
+    let btnCreate = document.getElementById("btnCreate");
+
+    let listid = localStorage.getItem("listid");
+
+    btnCreate.addEventListener("click", sendData);
+    
     //-----------------------------------------
 
     async function sendData() {
