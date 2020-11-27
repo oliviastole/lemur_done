@@ -10,7 +10,11 @@
 
 <body>
 
-    <button id="goback">Go back to: To do list</button>
+    <button id="goback">Go back to: Public list</button>
+
+    <p>Logged in as:</p>
+    <p id="userName"></p>
+
     <h1 id="listname" ></h1>
     <div id="container"></div>
 
@@ -25,6 +29,9 @@
     let token = localStorage.getItem("token");
     let listid = localStorage.getItem("listid"); 
     let goback = document.getElementById("goback");
+
+    let [userid, username, sign] = token.split(",");
+    userName.innerHTML = [username];
     
 
     let url = "/list_item?listid="+listid;

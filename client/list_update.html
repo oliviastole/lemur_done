@@ -41,6 +41,7 @@
     <button id="goback">Go back</button>
     <hr>
     <div id="container"></div>
+    <p id="outtext"></p>
 
 </body>
 
@@ -86,6 +87,8 @@
 
 
     async function listUpdate() {
+
+        outtext.innerHTML = "The list was updated";
 
         let url = "/lists";
 

@@ -11,6 +11,9 @@
 <body>
 
     <h1>Create item</h1>
+
+    <p>Logged in as:</p> 
+    <p id="userName"></p>
    
     <label for="itemName">Title:</label>
     <input id="itemName" type="text">
@@ -30,9 +33,12 @@
     let url = "/list_item";
 
     btnSend.addEventListener("click", sendData);
-    
+
     let listid = localStorage.getItem("listid");
     let token = localStorage.getItem("token");
+
+    let [userid, username, sign] = token.split(",");
+    userName.innerHTML = [username];
 
     //-----------------------------------------
 

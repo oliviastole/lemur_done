@@ -11,11 +11,11 @@
     <h1>Edit user</h1>
 
     <form id="theForm">
-        <label for="inpEmail">Email: </label>
-        <input id="inpEmail" type="email"/>
+        <label for="inpEmail">Your email: </label>
+        <input id="username" type="email"/>
         <br>
-        <label for="inpPsw">Password: </label>
-        <input id="inpPsw" type="password"/>
+        <label for="inpPsw">New password: </label>
+        <input id="password" type="password"/>
         <br>
         <input type="submit" value="Edit user"/>
         <button id="delUser">Delete user</button>
@@ -42,6 +42,9 @@ let [userid] = token.split(",");
 theForm.addEventListener("submit", editUser);
 delUser.addEventListener("click", deleteUser);
 
+let username = document.getElementById("username");
+username.value = localStorage.getItem("username"); 
+
 
 async function editUser(evt) {
     evt.preventDefault();
@@ -66,7 +69,7 @@ async function editUser(evt) {
 
     if (response.status == 200) {
         localStorage.removeItem("token");
-        location.href = "user_login.html";
+        location.href = "index.html";
     }
     else {
         location.href = "error.html";

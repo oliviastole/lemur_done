@@ -12,12 +12,16 @@
 
     <br>
     <button id="edit">Edit user</button>
+    <button id="public">Show public lists</button>
+
     <p>Logged in as:</p>
     <p id="userName"></p>
 
     <h1>To do list</h1>
-    <div id="container"></div>
+    <button id="btn3">Create new list</button>
     <br>
+    <hr>
+    <div id="container"></div>
     
     <p id="outtext"></p>
 
@@ -32,8 +36,31 @@
 
     let token = localStorage.getItem("token");
 
+
+    function editUser() {
+        location.href = "user_edit.html";
+    }
+
+    function showPublic() {
+        location.href = "list_public.html";
+    }
+
+   function newList() {
+        location.href = "lists_create.html";
+    }
+
+    
+
     let edit = document.getElementById("edit");
     edit.addEventListener("click", editUser);
+
+    let public = document.getElementById("public");
+    public.addEventListener("click", showPublic);
+
+    let btn3 = document.getElementById("btn3");
+    btn3.addEventListener("click", newList);
+
+    
 
     loadLists();
 
@@ -131,9 +158,7 @@
         loadLists();
     }   
 
-    function editUser() {
-            location.href = "user_edit.html";
-        }
+    
 
 </script>
 

@@ -10,6 +10,12 @@
 
 <body>
 
+    <br>
+    <button id="goback">Go back</button>
+    <br>
+    <p>Logged in as:</p>
+    <p id="userName"></p>
+
     <h1>Public to do list</h1>
     <hr>
     <div id="container"></div>
@@ -25,10 +31,17 @@
     let container = document.getElementById("container");
     let url = "/lists/public";
 
-    
-
-
     let token = localStorage.getItem("token");
+
+    let goback = document.getElementById("goback");
+    goback.addEventListener("click", goBack);
+
+    let [userid, username, sign] = token.split(",");
+    userName.innerHTML = [username];
+
+    function goBack() {
+        location.href = "lists_show.html";
+    }
 
     getPublicLists();
 
@@ -50,7 +63,7 @@ async function getPublicLists() {
             let html = `
                 <h2>${list.list_name}</h2>
                 <h3>${list.comm}</h3>
-                <h4>${list.user_name}</h4>       
+                <p>Created by: ${list.user_name}</p>       
             `;
 
             let btn2 = document.createElement("button");

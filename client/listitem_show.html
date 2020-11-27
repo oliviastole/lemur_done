@@ -12,7 +12,12 @@
 
     <button id="goback">Go back to: To do list</button>
     <button id="createitem">Create item</button>
-    <h1 id="listname" ></h1>
+
+    <p>Logged in as:</p>
+    <p id="userName"></p>
+
+    <h1 id="listname"></h1>
+
     <div id="container"></div>
 
 </body>
@@ -30,6 +35,9 @@
     let createitem = document.getElementById("createitem");
 
     let url = "/list_item?listid="+listid;
+
+    let [userid, username, sign] = token.split(",");
+    userName.innerHTML = [username];
     
     listname.innerHTML = localStorage.getItem("listname"); 
     
