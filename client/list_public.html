@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Delete list</title>
+</head>
+
+<body>
+
+    <h1>Public to do list</h1>
+    <hr>
+    <div id="container"></div>
+    <br>
+    <br>
+
+</body>
+
+<script>
+
+    // ---------------------------------------    
+
+    let container = document.getElementById("container");
+    let url = "/lists/public";
+
+    
+
+
+    let token = localStorage.getItem("token");
+
+    getPublicLists();
+
+    //-----------------------------------------  
+
+
+async function getPublicLists() {
+        
+        let cfg = {
+            method: "GET",
+            headers: {"auth" : token}
+        }
+
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+
+        for(let list of data) {
+            let div = document.createElement("div");
+            let html = `
+                <h2>${list.list_name}</h2>
+                <h3>${list.comm}</h3>
+                <h4>${list.user_name}</h4>       
+            `;
+
+            let btn2 = document.createElement("button");
+            btn2.innerHTML = "Show list items";
+
+            btn2.addEventListener("click", function(){
+                console.log(list.id);
+                localStorage.setItem("listid", list.id);
+                localStorage.setItem("listname", list.list_name);
+                localStorage.setItem("listcomm", list.comm);
+                localStorage.setItem("username", list.user_name);
+                location.href = "listitem_public.html";
+            });
+
+            let hr = document.createElement("hr");
+            
+            div.innerHTML = html;
+            div.appendChild(btn2);
+            div.appendChild(hr);
+            container.appendChild(div);
+            
+        }
+    }
+
+    //----------------------------------------
+
+</script>
+
+</html>

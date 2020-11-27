@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Delete list</title>
+</head>
+
+<body>
+
+    <h1>To do list</h1>
+    <hr>
+    <div id="container"></div>
+    <br>
+    <br>
+
+
+</body>
+
+<script>
+
+    // ---------------------------------------    
+
+    let container = document.getElementById("container");
+    let url = "/lists";
+
+    loadLists();
+
+    //-----------------------------------------  
+
+    async function loadLists() {
+        container.innerHTML = "";
+
+        let response = await fetch(url);
+        let data = await response.json();
+
+        for(let list of data) {
+            let div = document.createElement("div");
+            let html = `
+            <h3>${list.list_name}</h3> 
+            <p>${list.comm}</p>       
+            `;
+
+            let btn = document.createElement("button");
+            btn.innerHTML = "Delete list";
+            let hr = document.createElement("hr");
+
+            let btn1 = document.createElement("button");
+            btn1.innerHTML = "Edit list";
+
+            div.innerHTML = html;
+            div.appendChild(btn1);
+            div.appendChild(btn);
+            div.appendChild(hr);
+            container.appendChild(div);
+
+            btn1.addEventListener("click", function(){
+                localStorage.setItem("listid", list.id);
+                localStorage.setItem("listname", list.list_name);
+                location.href = "listitem_delete.html";
+            });
+
+            btn.addEventListener("click", function(){
+                del(list.id);
+            });
+        }
+    }
+
+    //----------------------------------------
+
+</script>
+
+</html>

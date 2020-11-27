@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Listitem show</title>
+</head>
+
+<body>
+
+    <button id="goback">Go back to: To do list</button>
+    <button id="createitem">Create item</button>
+    <h1 id="listname" ></h1>
+    <div id="container"></div>
+
+</body>
+
+<script>
+
+    // ---------------------------------------    
+    
+    let container = document.getElementById("container");
+    let listname = document.getElementById("listname"); 
+    let token = localStorage.getItem("token");
+    let listid = localStorage.getItem("listid"); 
+    let goback = document.getElementById("goback");
+    let edit = document.getElementById("edit");
+    let createitem = document.getElementById("createitem");
+
+    let url = "/list_item?listid="+listid;
+    
+    listname.innerHTML = localStorage.getItem("listname"); 
+    
+    goback.addEventListener("click", goBack);
+
+    async function goBack() {
+        location.href = "lists_show.html";
+    }
+
+    createitem.addEventListener("click", createItem);
+
+    async function createItem() {
+        location.href = "listitem_create.html";
+    }
+
+    loadlistItems();
+
+    //-----------------------------------------
+
+    
+    async function loadlistItems() {
+        container.innerHTML = "";
+
+        let cfg = {
+            method: "GET",
+            headers: {"auth" : token}
+        }
+
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+
+        if (response.status == 200) {
+        for(let item of data) {
+            let div = document.createElement("div");
+            let html = `
+                <br>
+                <h3>${item.item_name}</h3>        
+            `;
+
+            let btn = document.createElement("button");
+            btn.innerHTML = "Delete item";
+            let hr = document.createElement("hr");
+
+            div.innerHTML = html;
+            container.appendChild(div);
+            div.appendChild(btn);
+
+            btn.addEventListener("click", function(){
+                del(item.id);
+            });
+
+        }
+    }
+}
+
+    async function del(itemid) {
+
+        let updata = {
+            id: itemid
+        }
+
+        let cfg = {
+            method: "DELETE",
+            headers: {
+                "content-type" : "application/json",
+                "auth" : token
+            },
+            body: JSON.stringify(updata)
+        }
+
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+        
+        loadlistItems();
+    }  
+
+
+</script>
+
+</html>

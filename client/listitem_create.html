@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Create item</title>
+</head>
+
+<body>
+
+    <h1>Create item</h1>
+   
+    <label for="itemName">Title:</label>
+    <input id="itemName" type="text">
+    
+    <button id="btnSend">Create new item</button>
+
+</body>
+
+<script>
+
+    // ---------------------------------------    
+    
+    let itemName = document.getElementById("itemName");
+    let listId = document.getElementById("listId");
+    let btnSend = document.getElementById("btnSend");
+
+    let url = "/list_item";
+
+    btnSend.addEventListener("click", sendData);
+    
+    let listid = localStorage.getItem("listid");
+    let token = localStorage.getItem("token");
+
+    //-----------------------------------------
+
+    async function sendData() {
+
+        let updata = {
+            item_name: itemName.value,
+            list_id: listid
+        }
+
+        let cfg = {
+            method: "POST",
+            headers: {
+                "content-type" : "application/json",
+                "auth" : token
+            },
+            body: JSON.stringify(updata)
+        }
+
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+
+        location.href = "listitem_show.html";
+    }
+
+    //-----------------------------------------
+
+</script>
+
+</html>

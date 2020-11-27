@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Error</title>
+</head>
+
+<body>
+
+    <br>
+    <h1>Login failed</h1>
+    <button id="btnBack">Go back to try again</button>
+    <div id="container"></div>
+    <br>
+
+</body>
+
+<script>
+
+let btnBack = document.getElementById("btnBack");
+
+btnBack.addEventListener("click", goToLogin);
+
+function goToLogin() {
+    location.href = "user_login.html";
+}
+    
+</script>
+
+</html>

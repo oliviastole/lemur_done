@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>User create</title>
+</head>
+<body>
+
+    <h1>Create Your Account</h1>
+
+    <form id="theForm">
+        <label for="inpEmail">Email: </label>
+        <input id="inpEmail" type="email"/>
+        <br>
+        <label for="inpPsw">Password: </label>
+        <input id="inpPsw" type="password"/>
+        <br>
+        <input type="submit" value="Create user"/>
+    </form>
+    
+   <p id="outtext"></p>
+    
+
+</body>
+
+<script>
+
+let url = "/users";
+
+let inpEmail = document.getElementById("inpEmail");
+let inpPsw = document.getElementById("inpPsw");
+let outtext = document.getElementById('outtext');
+let btnSend = document.getElementById("btnSend");
+
+theForm.addEventListener("submit", createUser);
+
+    async function createUser(evt) {
+        evt.preventDefault();
+        
+        let updata = {
+            user_name: inpEmail.value,
+            password: inpPsw.value
+        };
+        
+        let cfg = {
+            method: "POST",
+            headers: {"content-type" : "application/json"},
+            body: JSON.stringify(updata)
+        }
+
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+
+        if (response.status == 200) {
+            location.href = "user_login.html";
+        }
+        else {
+            location.href = "failed.html";
+        }
+    };
+
+</script>
+
+</html>

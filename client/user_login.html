@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>User login</title>
+</head>
+<body>
+
+    <h1>Login to your account</h1>
+
+    <label for="inpEmail">Email: </label>
+    <input id="inpEmail" type="email"/>
+    <br>
+    <label for="inpPsw">Password: </label>
+    <input id="inpPsw" type="password"/>
+    <br>
+    <button id="btnLogin">Login</button>
+    <button id="btnCreate">Create user</button>
+
+   <p id="outtext"></p>
+
+</body>
+
+<script>
+
+let url = "/users/auth";
+
+let outtext = document.getElementById('outtext');
+let inpEmail = document.getElementById("inpEmail");
+let inpPsw = document.getElementById("inpPsw");
+let btnLogin = document.getElementById("btnLogin");
+let btnCreate = document.getElementById("btnCreate");
+
+
+    btnLogin.addEventListener("click", userLogin);
+
+    async function userLogin() {
+        
+        let updata = {
+            email: inpEmail.value,
+            psw: inpPsw.value
+        }
+        
+        let cfg = {
+            method: "POST",
+            headers: {"content-type" : "application/json"},
+            body: JSON.stringify(updata)
+        }
+
+        try{
+
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+
+            if(response.status == 200){
+                // Login ok - lagre token til localstorage
+                localStorage.setItem("token", data.token);
+                location.href = "lists_show.html";
+            }
+            else if (response.status == 401){
+                outtext.innerHTML = "Wrong username or password";
+            }
+            else {
+                outtext.innerHTML = "Something went wrong";
+            }
+
+        }
+        catch(err){
+            location.href = "error.html";
+        }
+        
+    }
+
+    // Gå til User create
+   
+    btnCreate.addEventListener("click", userCreate);
+
+    async function userCreate() {
+
+        location.href = "user_create.html";
+
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Create list</title>
+</head>
+
+<body>
+
+    <h1>Create list</h1>
+   
+    <label for="inpName">Title:</label>
+    <input id="inpName" type="text">
+    <br>
+    <br>
+    <label for="inpComm">Comment:</label>
+    <input id="inpComm" type="text">
+    <br>
+    <br>
+
+    <table>
+        <tr>
+          <td>
+            <label class="chkPubl">Public list?
+                <br>
+                <br>
+                <input id="chkPubl" type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+          </td>
+        </tr>
+      </table>
+
+    <br>
+    <br>
+    <button id="btnSend">Create new list</button>
+
+    <p id="outtext"></p>
+
+</body>
+
+<script>
+
+    // ---------------------------------------    
+    
+    let inpName = document.getElementById("inpName");
+    let inpComm = document.getElementById("inpComm");
+    let chkPubl = document.getElementById("chkPubl");
+    let btnSend = document.getElementById("btnSend");
+    let outtext = document.getElementById("outtext");
+
+    let url = "/lists";
+
+    let token = localStorage.getItem("token");
+
+    btnSend.addEventListener("click", sendData);
+
+    //-----------------------------------------
+
+    async function sendData() {
+
+        let updata = {
+            list_name: inpName.value,
+            comm: inpComm.value,
+            publ: chkPubl.checked
+        }
+
+        let cfg = {
+            method: "POST",
+            headers: {
+                "content-type" : "application/json",
+                "auth" : token
+            },
+            body: JSON.stringify(updata)
+        }
+
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+
+        if (data === true) {
+            outtext.innerHTML = "User exists";
+        }else if (data === true){
+            location.href = "lists_show.html";
+        }else {
+            outtext.innerHTML = "List is created";
+            location.href = "lists_show.html";
+        }
+
+    }
+
+</script>
+
+</html>

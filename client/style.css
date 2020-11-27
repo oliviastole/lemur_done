@@ -1,0 +1,173 @@
+* {
+  font-family: Trebuchet MS, sans-serif;
+}
+
+body {
+  background-color: #045b63;
+  text-align: center;
+}
+
+
+h1 {
+  text-transform: uppercase;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  font-size: 40px;
+  font-weight: 900;
+  color: white;
+}
+
+h2 {
+  text-decoration: underline;
+  color: white;
+}
+
+h3 {
+  color: white;
+}
+ 
+p {
+  color: white;
+}
+
+button {
+  background-color: white;
+  border-radius: 40px;
+  font-size: 15px;
+  border: 4px;
+  color: #444444;
+  padding: 15px 25px;
+  margin-top: 20px; 
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+
+
+input[type=text], select {
+  margin: 5px;
+  width: 50%;
+  text-align: center !important;
+  padding: 15px 25px;
+  border: 4px;
+  border-radius: 40px;
+}
+
+input[type=email], select {
+  margin: 5px;
+  width: 50%;
+  text-align: center !important;
+  padding: 15px 25px;
+  border: 4px;
+  border-radius: 40px;
+}
+
+input[type=password], select {
+  margin: 5px;
+  width: 50%;
+  text-align: center !important;
+  padding: 15px 25px;
+  border: 4px;
+  border-radius: 40px;
+}
+
+input[type=submit], select {
+  margin: 5px;
+  width: 50%;
+  text-align: center !important;
+  padding: 15px 25px;
+  border: 4px;
+  border-radius: 40px;
+}
+
+label {
+  color: white;
+}
+
+td {
+  margin: auto;
+  width: 10%;
+  padding: 25px 25px;
+  border-radius: 40px;
+}
+
+hr {
+  width: 70%;
+  margin-top: 6%;
+  margin-bottom: 6%;
+}
+
+/* COPIED CODE
+
+/* Customize the label (the container) */
+
+
+.chkPubl {
+  border-collapse: collapse;
+  padding-left: 35px;
+  margin: auto;
+  cursor: pointer;
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+/* Hide the old checkbox */
+.chkPubl input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create new checkbox */
+.checkmark {
+  position: absolute;
+  top: auto;
+  left: auto;
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+  background-color: #eee;
+}
+
+/* Add lightgrey background on mouseover */
+.chkPubl:hover input ~ .checkmark {
+  background-color:lightgrey;
+}
+
+/* Add white background when checked */
+.chkPubl input:checked ~ .checkmark {
+  background-color: #ffffff;
+}
+
+/* Create checkmark */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Display checkmark */
+.chkPubl input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Styling for checkmark */
+.chkPubl .checkmark:after {
+  width: 5px;
+  height: 10px;
+  left: 10px;
+  top: 6px;
+  border: solid #045b63;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg); /* Rotate the checkmark */
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Edit item</title>
+</head>
+
+<body>
+
+    <br>
+    <p>Logged in as:</p>
+    <p id="userName"></p>
+
+    <h1>Edit items</h1>
+
+    <h3>Itemnavn er:</h3>
+    <input id="itemname" type="text">
+
+
+    <br>
+    <br>
+    <button id="update">Update</button>
+    <button id="goback">Go back</button>
+    <hr>
+    <div id="container"></div>
+
+</body>
+
+<script>
+
+    // ---------------------------------------    
+
+    let container = document.getElementById("container");
+    let comment = document.getElementById("comment");
+    let createitem = document.getElementById("createitem");
+    let itemname = document.getElementById("itemname");
+    let goback = document.getElementById("goback");
+    let update = document.getElementById("update");
+
+
+    goback.addEventListener("click", goBack);
+    update.addEventListener("click", listUpdate);
+    
+    let token = localStorage.getItem("token");
+    let listid = localStorage.getItem("listid");
+
+    itemname.value = localStorage.getItem("itemname"); 
+    comment.value = localStorage.getItem("listcomm"); 
+
+    let [userid, username, sign] = token.split(",");
+    userName.innerHTML = [username];
+
+    //-----------------------------------------  
+
+
+    async function goBack() {
+        location.href = "lists_show.html";
+    }
+
+
+    //----------------------------------------
+
+
+    async function itemUpdate() {
+
+        let url = "/lists";
+
+        let updata = {
+            list_name: listname.value,
+            publ: chkPubl.checked,
+            comm: comment.value, 
+            list_id: listid
+        };
+
+        let cfg = {
+            method: "PUT",
+            headers: {
+                "content-type" : "application/json",
+                "auth" : token
+            },
+            body: JSON.stringify(updata)
+        };
+
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+    }
+
+</script>
+
+</html>

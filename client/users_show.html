@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Users</title>
+</head>
+
+<body>
+
+    <h1>Users</h1>
+    <div id="container"></div>
+    <br>
+
+</body>
+
+<script>
+
+    // ---------------------------------------    
+    
+    let container = document.getElementById("container");
+    let url = "/users";
+
+    loadUsers();
+
+    //-----------------------------------------
+
+    async function loadUsers() {
+        let response = await fetch(url);
+        let data = await response.json();
+
+        for(let users of data) {
+            let div = document.createElement("div");
+            let html = `
+                <h3>${users.user_name}</h3>
+                <p>${users.password}</p>   
+                <hr>         
+            `;
+            div.innerHTML = html;
+            container.appendChild(div);
+        }
+    }
+
+
+</script>
+
+</html>
