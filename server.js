@@ -199,7 +199,7 @@ app.delete('/users', async function (req, res) {
 
 
 
-// endpoint LOGIN POST auth --------------------------------------
+// endpoint USERLOGIN POST auth --------------------------------------
 
 app.post('/users/auth', async function (req, res) {
     
@@ -213,7 +213,7 @@ app.post('/users/auth', async function (req, res) {
         return;
     }
 
-    crypto.scrypt(password, "", 64, async function(err, key){
+    crypto.scrypt(password, salt, 64, async function(err, key){
         let hashedPsw = key.toString("hex");
 
         if (result[0].password == hashedPsw){
