@@ -253,7 +253,7 @@ app.use(function(err, req, res, next) { // hvis det er noe annet som skjer på s
 // start server -----------------------------------
 let port = process.env.PORT || 3000;
 app.listen(port, function () {
-    console.log('Server listening on port 3000!');
+    // console.log('Server listening on port 3000!');
 });
 
 
